@@ -1,10 +1,11 @@
 import "./App.css";
+import AnimalShow from "./components/AnimalShow";
 
 function App() {
   return (
-    <div className="App">
-      <header className="App-header">Learn React</header>
-    </div>
+    <>
+      <AnimalShow />
+    </>
   );
 }
 
