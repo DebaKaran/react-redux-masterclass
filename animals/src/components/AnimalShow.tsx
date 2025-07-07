@@ -20,12 +20,14 @@ const AnimalShow = () => {
     setAnimals([...animals, animal]);
   };
 
+  const renderedAnimals = animals.map((animal, index) => (
+    <div key={index}>{animal}</div>
+  ));
+
   return (
     <>
       <button onClick={handleOnClick}>Add Animal</button>
-      {animals.map((animal, index) => (
-        <div key={index}>{animal}</div>
-      ))}
+      {renderedAnimals}
     </>
   );
 };
