@@ -1,26 +1,11 @@
 import React, { useState } from "react";
-import bird from "../svg/bird.svg";
-import cat from "../svg/cat.svg";
-import cow from "../svg/cow.svg";
-import dog from "../svg/dog.svg";
-import gator from "../svg/gator.svg";
-import horse from "../svg/horse.svg";
-
-const svgMap = {
-  bird,
-  cat,
-  cow,
-  dog,
-  gator,
-  horse,
-};
-
-type Animal = keyof typeof svgMap;
-const keys = Object.keys(svgMap) as Animal[];
+import { svgMap } from "../data/animal-data";
+import type { Animal } from "../data/animal-data";
+import AnimalCard from "./AnimalCard";
 
 const getRandomAnimal = (): Animal => {
   const randomNum: number = Math.floor(Math.random() * keys.length);
-
+  const keys = Object.keys(svgMap) as Animal[];
   return keys[randomNum];
 };
 
@@ -33,14 +18,14 @@ const AnimalShow = () => {
   };
 
   const renderedAnimals = animals.map((animal, index) => (
-    <div key={index}>
-      <img alt="animal" src={svgMap[animal]} />
-    </div>
+    <AnimalCard key={index} animal={animal} />
   ));
 
   return (
     <>
-      <button onClick={handleOnClick}>Add Animal</button>
+      <button type="button" onClick={handleOnClick}>
+        Add Animal
+      </button>
       {renderedAnimals}
     </>
   );
