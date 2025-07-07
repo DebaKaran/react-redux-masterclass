@@ -15,25 +15,26 @@ const svgMap = {
   horse,
 };
 
-const getRandomAnimal = (): string => {
-  const randomNum: number = Math.floor(
-    Math.random() * Object.keys(svgMap).length
-  );
+type Animal = keyof typeof svgMap;
+const keys = Object.keys(svgMap) as Animal[];
 
-  return Object.keys(svgMap)[randomNum];
+const getRandomAnimal = (): Animal => {
+  const randomNum: number = Math.floor(Math.random() * keys.length);
+
+  return keys[randomNum];
 };
 
 const AnimalShow = () => {
-  const [animals, setAnimals] = useState<string[]>([]);
+  const [animals, setAnimals] = useState<Animal[]>([]);
 
   const handleOnClick = () => {
     const animal = getRandomAnimal();
-    setAnimals([...animals, animal]);
+    setAnimals((prev) => [...prev, animal]);
   };
 
   const renderedAnimals = animals.map((animal, index) => (
     <div key={index}>
-      <img alt="animal" src={svgMap[animal as keyof typeof svgMap]} />
+      <img alt="animal" src={svgMap[animal]} />
     </div>
   ));
 
