@@ -4,8 +4,9 @@ import type { Animal } from "../data/animal-data";
 import AnimalCard from "./AnimalCard";
 
 const getRandomAnimal = (): Animal => {
-  const randomNum: number = Math.floor(Math.random() * keys.length);
   const keys = Object.keys(svgMap) as Animal[];
+  const randomNum: number = Math.floor(Math.random() * keys.length);
+
   return keys[randomNum];
 };
 
