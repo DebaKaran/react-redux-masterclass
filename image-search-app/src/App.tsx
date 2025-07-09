@@ -9,15 +9,18 @@ import { MESSAGES } from "./messages/messages";
 function App() {
   const [images, setImages] = useState<UnsplashImage[]>([]);
   const [loading, setLoading] = useState(false);
+  const [error, setError] = useState<string | null>(null);
 
   const handleSearch = (searchTerm: string) => {
     const loadImages = async () => {
       try {
         setLoading(true); // Show spinner
+        setError(null); // Clear old error
         const fetchedImages: UnsplashImage[] = await fetchImages(searchTerm);
         setImages(fetchedImages);
-      } catch (error) {
-        console.error("Error fetching images:", error);
+      } catch (err) {
+        console.error("Error fetching images:", err);
+        setError(MESSAGES.NETWORK_ERROR);
       } finally {
         setLoading(false); // Hide spinner
       }
@@ -29,8 +32,14 @@ function App() {
   return (
     <>
       <SearchBar onSearch={handleSearch} />
-      {images.length === 0 && !loading && MESSAGES.NO_RESULTS}
-      {loading ? <Loader /> : <ImageCard images={images} />}
+      {error && <p style={{ color: "red" }}>{error}</p>}
+      {loading ? (
+        <Loader />
+      ) : images.length === 0 && !error ? (
+        <p>{MESSAGES.NO_RESULTS}</p>
+      ) : (
+        <ImageCard images={images} />
+      )}
     </>
   );
 }
