@@ -7,21 +7,24 @@ interface SearchBarProps {
 const SearchBar: React.FC<SearchBarProps> = ({ onSearch }) => {
   const [term, setTerm] = useState("");
 
-  const handleOnKeyDown = (e: React.KeyboardEvent<HTMLInputElement>) => {
-    if (e.key === "Enter") {
+  const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
+    e.preventDefault(); // Prevent page reload
+    if (term.trim()) {
       onSearch(term);
     }
   };
 
   return (
     <div>
-      <label> Search Term</label>
-      <input
-        type="text"
-        onChange={(e) => setTerm(e.target.value)}
-        onKeyDown={handleOnKeyDown}
-        value={term}
-      />
+      <form onSubmit={handleSubmit}>
+        <label htmlFor="search-input">Search Term</label>
+        <input
+          id="search-input"
+          type="text"
+          value={term}
+          onChange={(e) => setTerm(e.target.value)}
+        />
+      </form>
     </div>
   );
 };
