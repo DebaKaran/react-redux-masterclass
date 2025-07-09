@@ -4,6 +4,7 @@ import { fetchImages, type UnsplashImage } from "./api/unsplash-api";
 import SearchBar from "./components/SearchBar";
 import ImageCard from "./components/ImageCard";
 import Loader from "./components/Loader";
+import { MESSAGES } from "./messages/messages";
 
 function App() {
   const [images, setImages] = useState<UnsplashImage[]>([]);
@@ -28,6 +29,7 @@ function App() {
   return (
     <>
       <SearchBar onSearch={handleSearch} />
+      {images.length === 0 && !loading && MESSAGES.NO_RESULTS}
       {loading ? <Loader /> : <ImageCard images={images} />}
     </>
   );
