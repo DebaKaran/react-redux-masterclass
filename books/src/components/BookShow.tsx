@@ -18,9 +18,14 @@ const BookShow: React.FC<BookShowProps> = ({ book, onDelete, onEdit }) => {
     setShowEdit(!showEdit);
   };
 
+  const handleSubmit = (id: number, newTitle: string) => {
+    onEdit(id, newTitle); // update state in App
+    setShowEdit(false); // close the form
+  };
+
   let content = <h3>{book.title}</h3>;
   if (showEdit) {
-    content = <BookEdit book={book} onEdit={onEdit} />;
+    content = <BookEdit book={book} onSubmit={handleSubmit} />;
   }
 
   return (

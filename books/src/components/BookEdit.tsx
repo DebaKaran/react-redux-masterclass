@@ -3,15 +3,15 @@ import type { Book } from "../types/Book";
 
 interface BookEditProps {
   book: Book;
-  onEdit: (id: number, title: string) => void;
+  onSubmit: (id: number, title: string) => void;
 }
 
-const BookEdit: React.FC<BookEditProps> = ({ book, onEdit }) => {
+const BookEdit: React.FC<BookEditProps> = ({ book, onSubmit }) => {
   const [title, setTitle] = useState(book.title);
 
   const handleOnSubmit = (e) => {
     e.preventDefault();
-    onEdit(book.id, title);
+    onSubmit(book.id, title);
   };
 
   const handleOnChange = (event: React.ChangeEvent<HTMLInputElement>) => {
