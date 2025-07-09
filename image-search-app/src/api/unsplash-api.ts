@@ -6,6 +6,7 @@ const ACCESS_KEY = import.meta.env.VITE_UNSPLASH_ACCESS_KEY;
 export interface UnsplashImage {
   id: string;
   description: string;
+  alt_description: string;
   urls: {
     small: string;
     regular: string;
@@ -27,8 +28,8 @@ export const fetchImages = async (
     },
   });
 
-  console.log('KEY:', import.meta.env.VITE_UNSPLASH_ACCESS_KEY);
-console.log('All env:', import.meta.env);
+  console.log("KEY:", import.meta.env.VITE_UNSPLASH_ACCESS_KEY);
+  console.log("All env:", import.meta.env);
 
   const rawData = response.data;
 
