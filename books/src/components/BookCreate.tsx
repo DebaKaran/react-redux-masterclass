@@ -1,12 +1,10 @@
 import React, { useState } from "react";
-import type { Book } from "../types/Book";
 
 interface BookCreateProps {
-  numberOfBooks: number;
-  addBook: (book: Book) => void;
+  addBook: (title: string) => void;
 }
 
-const BookCreate: React.FC<BookCreateProps> = ({ numberOfBooks, addBook }) => {
+const BookCreate: React.FC<BookCreateProps> = ({ addBook }) => {
   const [title, setTitle] = useState("");
 
   const handlSubmit = (e: React.FormEvent<HTMLFormElement>) => {
@@ -14,13 +12,7 @@ const BookCreate: React.FC<BookCreateProps> = ({ numberOfBooks, addBook }) => {
 
     // Prevent Adding Empty Titles
     if (!title.trim()) return;
-
-    const newBook: Book = {
-      id: numberOfBooks + 1,
-      title: title.trim(),
-    };
-
-    addBook(newBook);
+    addBook(title);
     setTitle(""); // Add this after addBook(newBook)
   };
 
