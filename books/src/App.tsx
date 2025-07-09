@@ -5,13 +5,17 @@ import BookCreate from "./components/BookCreate";
 function App() {
   const [books, setBooks] = useState<Book[]>([]);
 
-  const handleAddBook = (book: Book) => {
-    setBooks((prev) => [...prev, book]);
+  const handleAddBook = (title: string) => {
+    const newBook: Book = {
+      id: books.length + 1,
+      title: title.trim(),
+    };
+    setBooks((prev) => [...prev, newBook]);
   };
 
   return (
     <>
-      <BookCreate numberOfBooks={books.length} addBook={handleAddBook} />
+      <BookCreate addBook={handleAddBook} />
       {books.map((book) => (
         <div key={book.id}>
           {book.id}, {book.title}
