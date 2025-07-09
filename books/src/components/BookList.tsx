@@ -4,10 +4,11 @@ import BookShow from "./BookShow";
 
 interface BookListProps {
   books: Book[];
+  onDelete: (id: number) => void;
 }
-const BookList: React.FC<BookListProps> = ({ books }) => {
+const BookList: React.FC<BookListProps> = ({ books, onDelete }) => {
   const renderedBooks = books.map((book) => {
-    return <BookShow key={book.id} book={book} />;
+    return <BookShow key={book.id} book={book} onDelete={onDelete}/>;
   });
   return <div className="book-list">{renderedBooks}</div>;
 };
