@@ -2,6 +2,7 @@ import { useState } from "react";
 import "./App.css";
 import { fetchImages, type UnsplashImage } from "./api/unsplash-api";
 import SearchBar from "./components/SearchBar";
+import ImageCard from "./components/ImageCard";
 
 function App() {
   const [images, setImages] = useState<UnsplashImage[]>([]);
@@ -23,9 +24,7 @@ function App() {
   return (
     <>
       <SearchBar onSearch={handleSearch} />
-      {images.map((img) => (
-        <p key={img.id}>{img.description}</p>
-      ))}
+      <ImageCard images={images} />
     </>
   );
 }
