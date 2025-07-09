@@ -1,6 +1,7 @@
 import { useState } from "react";
 import type { Book } from "./types/Book";
 import BookCreate from "./components/BookCreate";
+import BookList from "./components/BookList";
 
 function App() {
   const [books, setBooks] = useState<Book[]>([]);
@@ -14,14 +15,10 @@ function App() {
   };
 
   return (
-    <>
+    <div className="app">
+      <BookList books={books} />
       <BookCreate addBook={handleAddBook} />
-      {books.map((book) => (
-        <div key={book.id}>
-          {book.id}, {book.title}
-        </div>
-      ))}
-    </>
+    </div>
   );
 }
 
