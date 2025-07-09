@@ -17,15 +17,18 @@ const BookCreate: React.FC<BookCreateProps> = ({ addBook }) => {
   };
 
   return (
-    <div>
+    <div className="book-create">
+      <h3>Add a Book</h3>
       <form onSubmit={handlSubmit}>
         <label htmlFor="enter-title">Enter Title</label>
         <input
+          className="input"
           id="enter-title"
           type="text"
           value={title}
           onChange={(e) => setTitle(e.target.value)}
         />
+        <button className="button">Create</button>
       </form>
     </div>
   );
