@@ -1,5 +1,9 @@
 import axios from "axios";
-import type { Book, FetchBooksResponse } from "../types/bookTypes";
+import type {
+  Book,
+  CreateBookResponse,
+  FetchBooksResponse,
+} from "../types/bookTypes";
 
 const BASE_URL = "http://localhost:3001/books";
 
@@ -25,9 +29,21 @@ export const fetchBooks = async (retry = 2): Promise<FetchBooksResponse> => {
   }
 };
 
-export const createBook = async (title: string): Promise<Book> => {
-  const response = await axios.post(BASE_URL, { title });
-  return response.data;
+export const createBook = async (
+  title: string
+): Promise<CreateBookResponse> => {
+  try {
+    const response = await axios.post(BASE_URL, { title });
+    return { data: response.data, err: null };
+  } catch (err) {
+    // Optional: log raw error somewhere like Sentry or console
+    console.error("Fetch books error:", err);
+    // Friendly message for the UI
+    return {
+      data: null,
+      err: "Failed to create book. Please check your internet connection or try again later.",
+    };
+  }
 };
 
 export const deleteBookById = async (id: number): Promise<void> => {
