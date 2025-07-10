@@ -29,9 +29,14 @@ function App() {
   }, []); // ← this ensures it runs only once when the component mounts
 
   const createBook = async (title: string) => {
-    const newBook = await createBookService(title);
+    const result = await createBookService(title);
 
-    setBooks((prev) => [...prev, newBook]);
+    if (result.err) {
+      setErrorMsg(result.err);
+      return;
+    }
+
+    setBooks((prev) => [...prev, result.data!]);
   };
 
   const deleteBookById = async (id: number) => {
