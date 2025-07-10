@@ -3,8 +3,7 @@ import BookList from "./components/BookList";
 import { useBooks } from "./context/bookContext";
 
 function App() {
-  const { books, errorMsg, createBook, deleteBookById, editBookById } =
-    useBooks();
+  const { books, errorMsg, deleteBookById, editBookById } = useBooks();
 
   return (
     <>
@@ -16,7 +15,7 @@ function App() {
           onDelete={deleteBookById}
           onEdit={editBookById}
         />
-        <BookCreate addBook={createBook} />
+        <BookCreate />
       </div>
     </>
   );
