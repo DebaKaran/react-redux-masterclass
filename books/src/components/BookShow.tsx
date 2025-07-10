@@ -1,17 +1,18 @@
 import React, { useState } from "react";
 import type { Book } from "../types/bookTypes";
 import BookEdit from "./BookEdit";
+import { useBooks } from "../context/bookContext";
 
 interface BookShowProps {
   book: Book;
-  onDelete: (id: number) => void;
-  onEdit: (id: number, title: string) => void;
 }
-const BookShow: React.FC<BookShowProps> = ({ book, onDelete, onEdit }) => {
+
+const BookShow: React.FC<BookShowProps> = ({ book }) => {
   const [showEdit, setShowEdit] = useState(false);
+  const { deleteBookById, editBookById } = useBooks();
 
   const handleOnDelete = () => {
-    onDelete(book.id);
+    deleteBookById(book.id);
   };
 
   const handleEditClick = () => {
@@ -19,7 +20,7 @@ const BookShow: React.FC<BookShowProps> = ({ book, onDelete, onEdit }) => {
   };
 
   const handleSubmit = (id: number, newTitle: string) => {
-    onEdit(id, newTitle); // update state in App
+    editBookById(id, newTitle); // update state in App
     setShowEdit(false); // close the form
   };
 
