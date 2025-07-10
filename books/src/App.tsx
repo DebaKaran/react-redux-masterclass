@@ -25,7 +25,9 @@ function App() {
     setBooks((prev) => [...prev, response.data]);
   };
 
-  const deleteBookById = (id: number) => {
+  const deleteBookById = async (id: number) => {
+    await axios.delete(`http://localhost:3001/books/${id}`);
+
     const updatedBooks = books.filter((book) => {
       return book.id !== id;
     });
@@ -33,22 +35,26 @@ function App() {
     setBooks(updatedBooks);
   };
 
-  const editBookById = (id: number, newtitle: string) => {
+  const editBookById = async (id: number, newtitle: string) => {
+    const response = await axios.put(`http://localhost:3001/books/${id}`, {
+      title: newtitle,
+    });
+
     const updatedBooks = books.map((book) => {
       if (book.id === id) {
-        return { ...book, title: newtitle };
+        return { ...book, ...response.data };
       }
       return book;
     });
     setBooks(updatedBooks);
   };
   return (
-    // <div className="app">
-    //   <h1 className="title">Reading List</h1>
-    //   <BookList books={books} onDelete={deleteBookById} onEdit={editBookById} />
-    //   <BookCreate addBook={createBook} />
-    // </div>
-    <UseEffectPlayground />
+    <div className="app">
+      <h1 className="title">Reading List</h1>
+      <BookList books={books} onDelete={deleteBookById} onEdit={editBookById} />
+      <BookCreate addBook={createBook} />
+    </div>
+    // <UseEffectPlayground />
   );
 }
 
