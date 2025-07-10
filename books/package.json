@@ -8,8 +8,7 @@
     "build": "tsc -b && vite build",
     "lint": "eslint .",
     "preview": "vite preview",
-    "server": "json-server --watch db.json --port 3001"
-
+    "server": "json-server --watch db.json --port 3001 --host 127.0.0.1"
   },
   "dependencies": {
     "react": "^19.1.0",
