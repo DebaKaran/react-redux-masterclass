@@ -26,3 +26,8 @@ export interface BookFailureResponse {
 }
 
 export type BookResponse = BookSuccessResponse | BookFailureResponse;
+
+export interface DeleteBookResponse {
+  success: boolean;
+  err: string | null;
+}

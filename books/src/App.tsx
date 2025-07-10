@@ -40,8 +40,13 @@ function App() {
   };
 
   const deleteBookById = async (id: number) => {
-    await deleteBookService(id);
+    const result = await deleteBookService(id);
 
+    if (result.err) {
+      setErrorMsg(result.err);
+      return;
+    }
+    
     const updatedBooks = books.filter((book) => {
       return book.id !== id;
     });
@@ -57,7 +62,7 @@ function App() {
       return;
     }
     const updatedBook = result.data;
-    
+
     const updatedBooks = books.map((book) => {
       if (book.id === id) {
         return { ...book, ...updatedBook };
