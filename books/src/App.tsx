@@ -3,18 +3,14 @@ import BookList from "./components/BookList";
 import { useBooks } from "./context/bookContext";
 
 function App() {
-  const { books, errorMsg, deleteBookById, editBookById } = useBooks();
+  const { errorMsg } = useBooks();
 
   return (
     <>
       {errorMsg && <div className="error">{errorMsg}</div>}
       <div className="app">
         <h1 className="title">Reading List</h1>
-        <BookList
-          books={books}
-          onDelete={deleteBookById}
-          onEdit={editBookById}
-        />
+        <BookList />
         <BookCreate />
       </div>
     </>
