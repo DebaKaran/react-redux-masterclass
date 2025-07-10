@@ -33,6 +33,7 @@ function App() {
   };
   return (
     <div className="app">
+      <h1 className="title">Reading List</h1>
       <BookList books={books} onDelete={deleteBookById} onEdit={editBookById}/>
       <BookCreate addBook={handleAddBook} />
     </div>
