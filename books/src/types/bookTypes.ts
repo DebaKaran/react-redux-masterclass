@@ -15,16 +15,14 @@ export interface BooksFailureResponse {
 
 export type FetchBooksResponse = BooksSuccessReponse | BooksFailureResponse;
 
-export interface CreateBookSuccessResponse {
+export interface BookSuccessResponse {
   data: Book;
   err: null;
 }
 
-export interface CreateBookFailureResponse {
+export interface BookFailureResponse {
   data: null;
   err: string;
 }
 
-export type CreateBookResponse =
-  | CreateBookSuccessResponse
-  | CreateBookFailureResponse;
+export type BookResponse = BookSuccessResponse | BookFailureResponse;
