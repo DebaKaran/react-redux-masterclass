@@ -3,7 +3,7 @@ import type { Book, FetchBooksResponse } from "../types/bookTypes";
 
 const BASE_URL = "http://localhost:3001/books";
 
-export const fetchBooks = async (): Promise<FetchBooksResponse> => {
+export const fetchBooks = async (retry = 2): Promise<FetchBooksResponse> => {
   try {
     const response = await axios.get(BASE_URL);
     return { data: response.data, err: null };
@@ -11,6 +11,11 @@ export const fetchBooks = async (): Promise<FetchBooksResponse> => {
   } catch (err: any) {
     // Optional: log raw error somewhere like Sentry or console
     console.error("Fetch books error:", err);
+
+    if (retry > 0) {
+      await new Promise((res) => setTimeout(res, 1000)); // wait 1 sec
+      return fetchBooks(retry - 1);
+    }
 
     // Friendly message for the UI
     return {
