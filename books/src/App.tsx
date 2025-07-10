@@ -50,8 +50,14 @@ function App() {
   };
 
   const editBookById = async (id: number, newtitle: string) => {
-    const updatedBook = await editBookService(id, newtitle);
+    const result = await editBookService(id, newtitle);
 
+    if (result.err) {
+      setErrorMsg(result.err);
+      return;
+    }
+    const updatedBook = result.data;
+    
     const updatedBooks = books.map((book) => {
       if (book.id === id) {
         return { ...book, ...updatedBook };
