@@ -3,14 +3,20 @@ import type { Book } from "./types/Book";
 import BookCreate from "./components/BookCreate";
 import BookList from "./components/BookList";
 import axios from "axios";
-import UseEffectPlayground from "./components/UseEffectPlayground";
+
+import {
+  fetchBooks as fetchBooksService,
+  createBook as createBookService,
+  deleteBookById as deleteBookService,
+  editBookById as editBookService,
+} from "./services/bookService";
 
 function App() {
   const [books, setBooks] = useState<Book[]>([]);
 
   const fetchBooks = async () => {
-    const response = await axios.get("http://localhost:3001/books");
-    setBooks(response.data);
+    const response = await fetchBooksService();
+    setBooks(response);
   };
 
   useEffect(() => {
@@ -18,15 +24,13 @@ function App() {
   }, []); // ← this ensures it runs only once when the component mounts
 
   const createBook = async (title: string) => {
-    const response = await axios.post("http://localhost:3001/books", {
-      title: title.trim(),
-    });
+    const newBook = await createBookService(title);
 
-    setBooks((prev) => [...prev, response.data]);
+    setBooks((prev) => [...prev, newBook]);
   };
 
   const deleteBookById = async (id: number) => {
-    await axios.delete(`http://localhost:3001/books/${id}`);
+    await deleteBookService(id);
 
     const updatedBooks = books.filter((book) => {
       return book.id !== id;
@@ -36,13 +40,11 @@ function App() {
   };
 
   const editBookById = async (id: number, newtitle: string) => {
-    const response = await axios.put(`http://localhost:3001/books/${id}`, {
-      title: newtitle,
-    });
+    const updatedBook = await editBookService(id, newtitle);
 
     const updatedBooks = books.map((book) => {
       if (book.id === id) {
-        return { ...book, ...response.data };
+        return { ...book, ...updatedBook };
       }
       return book;
     });
