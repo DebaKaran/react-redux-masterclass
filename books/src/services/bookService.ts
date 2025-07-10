@@ -1,5 +1,9 @@
 import axios from "axios";
-import type { BookResponse, FetchBooksResponse } from "../types/bookTypes";
+import type {
+  BookResponse,
+  DeleteBookResponse,
+  FetchBooksResponse,
+} from "../types/bookTypes";
 
 const BASE_URL = "http://localhost:3001/books";
 
@@ -40,8 +44,19 @@ export const createBook = async (title: string): Promise<BookResponse> => {
   }
 };
 
-export const deleteBookById = async (id: number): Promise<void> => {
-  await axios.delete(`${BASE_URL}/${id}`);
+export const deleteBookById = async (
+  id: number
+): Promise<DeleteBookResponse> => {
+  try {
+    await axios.delete(`${BASE_URL}/${id}`);
+    return { success: true, err: null };
+  } catch (err) {
+    console.error("Delete book error:", err);
+    return {
+      success: false,
+      err: "Failed to delete the book. It may not exist or you may have a connection issue.",
+    };
+  }
 };
 
 export const editBookById = async (
