@@ -1,5 +1,5 @@
 import React from "react";
-import type { Book } from "../types/Book";
+import type { Book } from "../types/bookTypes";
 import BookShow from "./BookShow";
 
 interface BookListProps {
