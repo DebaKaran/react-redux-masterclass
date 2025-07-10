@@ -1,25 +1,23 @@
 import React, { useState } from "react";
+import { useBooks } from "../context/bookContext";
 
-interface BookCreateProps {
-  addBook: (title: string) => void;
-}
-
-const BookCreate: React.FC<BookCreateProps> = ({ addBook }) => {
+const BookCreate: React.FC = () => {
   const [title, setTitle] = useState("");
+  const { createBook } = useBooks();
 
-  const handlSubmit = (e: React.FormEvent<HTMLFormElement>) => {
+  const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault(); // Prevent page reload
 
     // Prevent Adding Empty Titles
     if (!title.trim()) return;
-    addBook(title);
+    createBook(title);
     setTitle(""); // Add this after addBook(newBook)
   };
 
   return (
     <div className="book-create">
       <h3>Add a Book</h3>
-      <form onSubmit={handlSubmit}>
+      <form onSubmit={handleSubmit}>
         <label htmlFor="enter-title">Enter Title</label>
         <input
           className="input"
