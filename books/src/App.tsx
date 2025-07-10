@@ -1,8 +1,7 @@
 import { useEffect, useState } from "react";
-import type { Book } from "./types/Book";
+import type { Book } from "./types/bookTypes";
 import BookCreate from "./components/BookCreate";
 import BookList from "./components/BookList";
-import axios from "axios";
 
 import {
   fetchBooks as fetchBooksService,
@@ -14,9 +13,15 @@ import {
 function App() {
   const [books, setBooks] = useState<Book[]>([]);
 
+  const [errorMsg, setErrorMsg] = useState<string | null>(null);
+
   const fetchBooks = async () => {
-    const response = await fetchBooksService();
-    setBooks(response);
+    const result = await fetchBooksService();
+    if (result.err) {
+      setErrorMsg(result.err);
+    } else {
+      setBooks(result.data);
+    }
   };
 
   useEffect(() => {
@@ -51,12 +56,18 @@ function App() {
     setBooks(updatedBooks);
   };
   return (
-    <div className="app">
-      <h1 className="title">Reading List</h1>
-      <BookList books={books} onDelete={deleteBookById} onEdit={editBookById} />
-      <BookCreate addBook={createBook} />
-    </div>
-    // <UseEffectPlayground />
+    <>
+      {errorMsg && <div className="error">{errorMsg}</div>}
+      <div className="app">
+        <h1 className="title">Reading List</h1>
+        <BookList
+          books={books}
+          onDelete={deleteBookById}
+          onEdit={editBookById}
+        />
+        <BookCreate addBook={createBook} />
+      </div>
+    </>
   );
 }
 

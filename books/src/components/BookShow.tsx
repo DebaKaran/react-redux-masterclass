@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import type { Book } from "../types/Book";
+import type { Book } from "../types/bookTypes";
 import BookEdit from "./BookEdit";
 
 interface BookShowProps {
