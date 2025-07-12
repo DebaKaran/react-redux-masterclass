@@ -11,6 +11,7 @@ function App() {
         rounded
         outlined
         onClick={() => console.log("Clicked!")}
+        className="mb-5"
       >
         <GoBell />
         Clicked Me!!
