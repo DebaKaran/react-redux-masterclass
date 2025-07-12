@@ -3,18 +3,19 @@ import type { ButtonVariantProps } from "./button-types";
 import className from "classnames";
 import { twMerge } from "tailwind-merge";
 
-interface ButtonProps {
+type ButtonProps = {
   buttonVariantProps: ButtonVariantProps;
   outlined?: boolean;
   rounded?: boolean;
   children: React.ReactNode;
-}
+} & React.ButtonHTMLAttributes<HTMLButtonElement>; //  Inherit all button props
 
 const Button: React.FC<ButtonProps> = ({
   buttonVariantProps,
   outlined,
   rounded,
   children,
+  ...rest //  Collect all other props (like onClick)
 }) => {
   // Convert variant object to string
   const variant = Object.keys(
@@ -37,7 +38,11 @@ const Button: React.FC<ButtonProps> = ({
       "text-red-500": outlined && variant === "danger",
     })
   );
-  return <button className={classes}>{children}</button>;
+  return (
+    <button className={classes} {...rest}>
+      {children}
+    </button>
+  );
 };
 
 export default Button;

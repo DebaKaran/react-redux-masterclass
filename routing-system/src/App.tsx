@@ -6,12 +6,12 @@ import { GoBell, GoDatabase, GoCloud } from "react-icons/go";
 function App() {
   return (
     <>
-      <div className="bg-blue-500 text-white text-xl p-4">
-        Tailwind is working?
-      </div>
-      <div className="bg-blue-500 text-white p-4">Tailwind Working?</div>
-
-      <Button buttonVariantProps={{ primary: true }} rounded outlined>
+      <Button
+        buttonVariantProps={{ primary: true }}
+        rounded
+        outlined
+        onClick={() => console.log("Clicked!")}
+      >
         <GoBell />
         Clicked Me!!
       </Button>
