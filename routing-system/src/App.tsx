@@ -1,39 +1,31 @@
 import "./index.css";
 import "./App.css";
-import Button from "./components/Buttons/Button";
-import { GoBell, GoDatabase, GoCloud } from "react-icons/go";
 
-function App() {
+import Accordion from "./components/Accordion";
+
+const App = () => {
+  const items = [
+    {
+      label: "What is React?",
+      content:
+        "React is a JS library for building UIs. You can use react on any project you want. You can use react on any project you want.",
+    },
+    {
+      label: "Why use React?",
+      content:
+        "React makes building UIs easier and more modular. You can use react on any project you want. You can use react on any project you want.",
+    },
+    {
+      label: "How does React work?",
+      content:
+        "React creates a virtual DOM and syncs it efficiently with the real DOM. You can use react on any project you want. You can use react on any project you want.",
+    },
+  ];
   return (
     <>
-      <Button
-        buttonVariantProps={{ primary: true }}
-        rounded
-        outlined
-        onClick={() => console.log("Clicked!")}
-        className="mb-5"
-      >
-        <GoBell />
-        Clicked Me!!
-      </Button>
-      <br />
-      <Button buttonVariantProps={{ danger: true }} outlined>
-        <GoCloud />
-        Buy Now
-      </Button>
-      <br />
-      <Button buttonVariantProps={{ warning: true }}>See Deal</Button>
-      <br />
-      <Button buttonVariantProps={{ secondary: true }} outlined>
-        <GoDatabase />
-        Hide Ads!
-      </Button>
-      <br />
-      <Button buttonVariantProps={{ success: true }} outlined rounded>
-        Buy is successful!
-      </Button>
+      <Accordion items={items} />
     </>
   );
-}
+};
 
 export default App;

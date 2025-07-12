@@ -48,3 +48,15 @@ So this is invalid:
 
 <Button buttonVariantProps={{ primary: true, success: true }} />
 // Error: Only one key can be true
+
+# React Accordion App
+
+A simple React Accordion component built using TypeScript and functional components.
+
+## Features
+
+- Expand/collapse sections
+- Type-safe with TypeScript
+- Component-based structure
+
+## Getting Started
