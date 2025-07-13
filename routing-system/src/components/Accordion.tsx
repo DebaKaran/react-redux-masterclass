@@ -19,7 +19,7 @@ const Accordion: React.FC<AccordionProps> = ({ items }) => {
 
     return (
       <div key={index}>
-        <div>{item.label}</div>
+        <div onClick={() => setExpandedIndex(index)}>{item.label}</div>
         {content}
       </div>
     );
