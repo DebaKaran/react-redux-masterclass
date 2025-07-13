@@ -13,12 +13,12 @@ interface AccordionProps {
 const Accordion: React.FC<AccordionProps> = ({ items }) => {
   const [expandedIndex, setExpandedIndex] = useState(-1);
 
-  const handleClick = (index: number) => {
-    if (index === expandedIndex) {
-      setExpandedIndex(-1);
-    } else {
-      setExpandedIndex(index);
-    }
+  const handleClick = (nextIndex: number) => {
+    console.log("STALE expandedIndex:", expandedIndex); // outside setState
+    setExpandedIndex((current) => {
+      console.log("UP-TO-DATE expandedIndex:", current); // this is the correct one
+      return current === nextIndex ? -1 : nextIndex;
+    });
   };
 
   const renderedItems = items.map((item, index) => {
