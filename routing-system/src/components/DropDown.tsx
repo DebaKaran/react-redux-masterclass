@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState } from "react";
 
 export interface DropDownOption {
   label: string;
@@ -10,13 +10,22 @@ export interface DropdownProps {
 }
 
 const DropDown: React.FC<DropdownProps> = ({ options }) => {
+  const [isOpen, setIsOpen] = useState(false);
+
   const renderedOptions = options.map((option) => {
     return <div key={option.value}>{option.label}</div>;
   });
+
+  const content = isOpen && <div>{renderedOptions}</div>;
+
+  const handleClick = () => {
+    setIsOpen((currentIsOpen) => !currentIsOpen);
+  };
+
   return (
     <div>
-      <div>Select...</div>
-      <div>{renderedOptions}</div>
+      <div onClick={handleClick}>Select...</div>
+      {content}
     </div>
   );
 };
