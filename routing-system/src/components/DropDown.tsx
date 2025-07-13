@@ -12,8 +12,16 @@ export interface DropdownProps {
 const DropDown: React.FC<DropdownProps> = ({ options }) => {
   const [isOpen, setIsOpen] = useState(false);
 
+  const handleOptionClcick = () => {
+    setIsOpen(false);
+  };
+
   const renderedOptions = options.map((option) => {
-    return <div key={option.value}>{option.label}</div>;
+    return (
+      <div key={option.value} onClick={handleOptionClcick}>
+        {option.label}
+      </div>
+    );
   });
 
   const content = isOpen && <div>{renderedOptions}</div>;
