@@ -11,10 +11,14 @@ interface AccordionProps {
 }
 
 const Accordion: React.FC<AccordionProps> = ({ items }) => {
-  const [expandedIndex, setExpandedIndex] = useState(0); //0 means the first section is open by default.
+  const [expandedIndex, setExpandedIndex] = useState(-1);
 
   const handleClick = (index: number) => {
-    setExpandedIndex(index);
+    if (index === expandedIndex) {
+      setExpandedIndex(-1);
+    } else {
+      setExpandedIndex(index);
+    }
   };
 
   const renderedItems = items.map((item, index) => {
