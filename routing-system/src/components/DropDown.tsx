@@ -1,20 +1,20 @@
 import React, { useState } from "react";
+import type { DropDownOption, DropdownProps } from "../types/DropDown.types";
 
-export interface DropDownOption {
-  label: string;
-  value: string;
-}
 
-export interface DropdownProps {
-  options: DropDownOption[];
-}
 
-const DropDown: React.FC<DropdownProps> = ({ options }) => {
+const DropDown: React.FC<DropdownProps> = ({
+  options,
+  selection,
+  onSelect,
+}) => {
   const [isOpen, setIsOpen] = useState(false);
 
   const handleOptionClcick = (option: DropDownOption) => {
     setIsOpen(false);
-    console.log(option.label);
+
+    //what option did the user clicked on
+    onSelect(option);
   };
 
   const renderedOptions = options.map((option) => {
@@ -31,9 +31,14 @@ const DropDown: React.FC<DropdownProps> = ({ options }) => {
     setIsOpen((currentIsOpen) => !currentIsOpen);
   };
 
+  let labelDetailsContent = "Select...";
+  if (selection) {
+    labelDetailsContent = selection.label;
+  }
+
   return (
     <div>
-      <div onClick={handleClick}>Select...</div>
+      <div onClick={handleClick}>{labelDetailsContent}</div>
       {content}
     </div>
   );
