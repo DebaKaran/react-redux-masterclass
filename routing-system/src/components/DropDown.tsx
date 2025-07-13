@@ -1,8 +1,6 @@
 import React, { useState } from "react";
 import type { DropDownOption, DropdownProps } from "../types/DropDown.types";
 
-
-
 const DropDown: React.FC<DropdownProps> = ({
   options,
   selection,
@@ -31,14 +29,9 @@ const DropDown: React.FC<DropdownProps> = ({
     setIsOpen((currentIsOpen) => !currentIsOpen);
   };
 
-  let labelDetailsContent = "Select...";
-  if (selection) {
-    labelDetailsContent = selection.label;
-  }
-
   return (
     <div>
-      <div onClick={handleClick}>{labelDetailsContent}</div>
+      <div onClick={handleClick}>{selection?.label || "Select..."}</div>
       {content}
     </div>
   );
