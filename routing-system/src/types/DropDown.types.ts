@@ -5,8 +5,8 @@ export interface DropDownOption {
 
 export interface DropdownProps {
   options: DropDownOption[];
-  selection: SelectedOption;
-  onSelect: (option: DropDownOption) => void;
+  value: SelectedOption;
+  onChange: (option: DropDownOption) => void;
 }
 
 export type SelectedOption = DropDownOption | null;

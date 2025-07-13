@@ -4,18 +4,18 @@ import { colorOptions } from "../data/dropdownOptions";
 import type { DropDownOption, SelectedOption } from "../types/DropDown.types";
 
 const DropDownPage = () => {
-  const [selection, setSelection] = useState<SelectedOption>(null);
+  const [value, setValue] = useState<SelectedOption>(null);
 
-  const handleSelecttion = (option: DropDownOption) => {
-    setSelection(option);
+  const handleSelection = (option: DropDownOption) => {
+    setValue(option);
   };
 
   return (
     <>
       <DropDown
         options={colorOptions}
-        selection={selection}
-        onSelect={handleSelecttion}
+        value={value}
+        onChange={handleSelection}
       />
     </>
   );
