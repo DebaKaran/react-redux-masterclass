@@ -11,13 +11,13 @@ const DropDownPage = () => {
   };
 
   return (
-    <>
+    <div className="flex">
       <DropDown
         options={colorOptions}
         value={value}
         onChange={handleSelection}
       />
-    </>
+    </div>
   );
 };
 
