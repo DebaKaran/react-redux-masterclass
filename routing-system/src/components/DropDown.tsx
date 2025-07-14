@@ -1,33 +1,45 @@
 import React, { useState } from "react";
 import type { DropDownOption, DropdownProps } from "../types/DropDown.types";
+import Panel from "./Panel";
+import { GoChevronDown } from "react-icons/go";
 
 const DropDown: React.FC<DropdownProps> = ({ options, value, onChange }) => {
   const [isOpen, setIsOpen] = useState(false);
 
-  const handleOptionClcick = (option: DropDownOption) => {
+  const handleOptionClick = (option: DropDownOption) => {
     setIsOpen(false);
 
-    //what option did the user clicked on
-    onChange(option);
+    //You might want to prevent re-selecting the currently selected option:
+    if (option.value !== value?.value) {
+      onChange(option);
+    }
   };
 
   const renderedOptions = options.map((option) => {
     return (
-      <div key={option.value} onClick={() => handleOptionClcick(option)}>
+      <div key={option.value} onClick={() => handleOptionClick(option)}>
         {option.label}
       </div>
     );
   });
 
-  const content = isOpen && <div>{renderedOptions}</div>;
+  const content = isOpen && (
+    <Panel className="absolute top-full">{renderedOptions}</Panel>
+  );
 
   const handleClick = () => {
     setIsOpen((currentIsOpen) => !currentIsOpen);
   };
 
   return (
-    <div>
-      <div onClick={handleClick}>{value?.label || "Select..."}</div>
+    <div className="w-48 relative">
+      <Panel
+        onClick={handleClick}
+        className="flex justify-between items-center cursor-pointer"
+      >
+        {value?.label || "Select..."}
+        <GoChevronDown className="text-lg" />
+      </Panel>
       {content}
     </div>
   );
