@@ -14,6 +14,7 @@ const NavigationProvider: React.FC<NavigationProviderProps> = ({
   }, []);
 
   const navigate = (to: string) => {
+    if(to === currentPath) return;
     window.history.pushState({}, "", to);
     setCurrentPath(to);
   };
