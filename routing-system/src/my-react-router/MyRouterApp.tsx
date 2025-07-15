@@ -1,30 +1,23 @@
 import AccordionPage from "../pages/AccordionPage";
 import DropDownPage from "../pages/DropDownPage";
 import ButtonPage from "../pages/ButtonPage";
-import MyLink from "./MyLink";
 import MyRoute from "./MyRoute";
+import SideBar from "../components/SideBar";
 
 const MyRouterApp = () => {
   return (
     <div>
-      <nav style={{ marginBottom: "1rem" }}>
-        <MyLink to="/accordion">Accordion</MyLink> |{" "}
-        <MyLink to="/dropdown">Dropdown</MyLink> |{" "}
-        <MyLink to="/buttons">Buttons</MyLink>
-      </nav>
+      <SideBar />
       <hr />
 
       <MyRoute path="/accordion">
         <AccordionPage />
       </MyRoute>
-      <MyRoute path="/dropdown">
+      <MyRoute path="/">
         <DropDownPage />
       </MyRoute>
       <MyRoute path="/buttons">
         <ButtonPage />
-      </MyRoute>
-      <MyRoute path="/">
-        <div>Home Page</div>
       </MyRoute>
     </div>
   );
