@@ -1,4 +1,5 @@
-import React from "react";
+import React, { useContext } from "react";
+import { NavigationContext } from "../context/NavigationContext";
 
 interface MyLinkProps {
   to: string;
@@ -6,18 +7,15 @@ interface MyLinkProps {
 }
 
 const MyLink: React.FC<MyLinkProps> = ({ to, children }) => {
+  const { navigate } = useContext(NavigationContext);
+
   const handleClick = (
     event: React.MouseEvent<HTMLAnchorElement, MouseEvent>
   ) => {
     // Prevent full page reload
     event.preventDefault();
 
-    // Update the URL
-    window.history.pushState({}, "", to);
-
-    // Fake popstate event to trigger route change in our app
-    const navEvent = new PopStateEvent("popstate");
-    window.dispatchEvent(navEvent);
+    navigate(to);
   };
   return (
     <a href={to} onClick={handleClick}>
