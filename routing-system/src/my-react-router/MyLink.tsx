@@ -12,6 +12,11 @@ const MyLink: React.FC<MyLinkProps> = ({ to, children }) => {
   const handleClick = (
     event: React.MouseEvent<HTMLAnchorElement, MouseEvent>
   ) => {
+    // Allow browser default behavior for new tab (Cmd/Ctrl + Click)
+    if (event.metaKey || event.ctrlKey) {
+      return;
+    }
+
     // Prevent full page reload
     event.preventDefault();
 
