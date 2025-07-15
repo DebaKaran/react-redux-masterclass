@@ -1,6 +1,6 @@
-import React, { useContext } from "react";
-import { NavigationContext } from "../context/NavigationContext";
+import React from "react";
 import classNames from "classnames";
+import useNavigation from "../hooks/use-Navigation";
 
 interface MyLinkProps {
   to: string;
@@ -8,7 +8,7 @@ interface MyLinkProps {
 }
 
 const MyLink: React.FC<MyLinkProps> = ({ to, children }) => {
-  const { navigate } = useContext(NavigationContext);
+  const { navigate } = useNavigation();
   const classes = classNames("text-blue-500");
 
   const handleClick = (

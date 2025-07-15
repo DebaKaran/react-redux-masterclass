@@ -1,5 +1,5 @@
-import React, { useContext } from "react";
-import { NavigationContext } from "../context/NavigationContext";
+import React from "react";
+import useNavigation from "../hooks/use-Navigation";
 
 interface MyRouteProps {
   path: string;
@@ -7,7 +7,7 @@ interface MyRouteProps {
 }
 
 const MyRoute: React.FC<MyRouteProps> = ({ path, children }) => {
-  const { currentPath } = useContext(NavigationContext);
+  const { currentPath } = useNavigation();
 
   return currentPath === path ? children : null;
 };
