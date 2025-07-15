@@ -22,7 +22,7 @@ const SideBar = () => {
   });
 
   return (
-    <div className="sticky top-0 overflow-y-scroll flex flex-col align-start">
+    <div className="sticky top-0 overflow-y-scroll flex flex-col item-start">
       {renderedLinks}
     </div>
   );
