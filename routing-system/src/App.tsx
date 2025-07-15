@@ -1,11 +1,11 @@
 import "./index.css";
 import "./App.css";
-import DropDownPage from "./pages/DropDownPage";
+import MyRouterApp from "./my-react-router/MyRouterApp";
 
 const App = () => {
   return (
     <>
-      <DropDownPage />
+      <MyRouterApp />
     </>
   );
 };
