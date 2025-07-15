@@ -10,7 +10,12 @@ const SideBar = () => {
 
   const renderedLinks = links.map((link) => {
     return (
-      <MyLink to={link.path} key={link.label} className="mb-12 bg-yellow-100">
+      <MyLink
+        to={link.path}
+        key={link.label}
+        className="mb-12 bg-yellow-100"
+        activeClassName="font-bold border-l-4 border-blue-500 pl-2"
+      >
         {link.label}
       </MyLink>
     );

@@ -6,11 +6,21 @@ interface MyLinkProps {
   to: string;
   children: React.ReactNode;
   className?: string;
+  activeClassName?: string;
 }
 
-const MyLink: React.FC<MyLinkProps> = ({ to, children, className }) => {
-  const { navigate } = useNavigation();
-  const classes = classNames("text-blue-500", className);
+const MyLink: React.FC<MyLinkProps> = ({
+  to,
+  children,
+  className,
+  activeClassName,
+}) => {
+  const { navigate, currentPath } = useNavigation();
+  const classes = classNames(
+    "text-blue-500",
+    className,
+    currentPath === to && activeClassName
+  );
 
   const handleClick = (
     event: React.MouseEvent<HTMLAnchorElement, MouseEvent>
