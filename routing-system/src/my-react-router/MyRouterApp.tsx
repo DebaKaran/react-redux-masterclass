@@ -6,19 +6,21 @@ import SideBar from "../components/SideBar";
 
 const MyRouterApp = () => {
   return (
-    <div>
+    <div className="container mx-auto grid grid-cols-6 gap-4 mt-4">
       <SideBar />
       <hr />
 
-      <MyRoute path="/accordion">
-        <AccordionPage />
-      </MyRoute>
-      <MyRoute path="/">
-        <DropDownPage />
-      </MyRoute>
-      <MyRoute path="/buttons">
-        <ButtonPage />
-      </MyRoute>
+      <div className="col-span-5">
+        <MyRoute path="/accordion">
+          <AccordionPage />
+        </MyRoute>
+        <MyRoute path="/">
+          <DropDownPage />
+        </MyRoute>
+        <MyRoute path="/buttons">
+          <ButtonPage />
+        </MyRoute>
+      </div>
     </div>
   );
 };
