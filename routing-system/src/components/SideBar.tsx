@@ -1,4 +1,3 @@
-import React from "react";
 import MyLink from "../my-react-router/MyLink";
 
 const SideBar = () => {

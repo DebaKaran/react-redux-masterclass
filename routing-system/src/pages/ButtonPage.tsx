@@ -1,4 +1,3 @@
-import React from "react";
 import { GoBell, GoDatabase, GoCloud } from "react-icons/go";
 import Button from "../components/Buttons/Button";
 
