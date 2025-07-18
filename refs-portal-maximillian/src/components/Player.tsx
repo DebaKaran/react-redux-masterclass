@@ -1,23 +1,22 @@
-import { useState } from "react";
+import { useRef, useState } from "react";
 
 const Player = () => {
-  const [name, setName] = useState("");
+  const inputRef = useRef<HTMLInputElement>(null);
   const [content, setContent] = useState("Welcome unknown entity");
 
   const handleClick = () => {
-    setContent(`Welcome ${name}`);
-    setName("");
+    const enteredName = inputRef.current?.value;
+    setContent(`Welcome ${enteredName}`);
+    if (inputRef.current) {
+      inputRef.current.value = ""; // clear the input
+    }
   };
 
   return (
     <section id="player">
       <h2>{content}</h2>
       <p>
-        <input
-          type="text"
-          value={name}
-          onChange={(event) => setName(event.target.value)}
-        />
+        <input type="text" ref={inputRef} />
         <button onClick={handleClick}>Set Name</button>
       </p>
     </section>
