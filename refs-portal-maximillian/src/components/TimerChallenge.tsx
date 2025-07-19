@@ -22,6 +22,7 @@ const TimerChallenge: React.FC<TimerChallengeProps> = ({
   };
 
   const timeText = `${targetTime} ${targetTime === 1 ? "second" : "seconds"}`;
+
   const statusText = timerExpired
     ? "Time is finished"
     : isRunning
@@ -35,10 +36,10 @@ const TimerChallenge: React.FC<TimerChallengeProps> = ({
       <p className="challenge-time">{timeText}</p>
       <p>
         <button onClick={handleStart} disabled={isRunning || timerExpired}>
-          Start Challenge
+          {timerExpired ? "Stop " : "Start "}Challenge
         </button>
       </p>
-      <p>{statusText}</p>
+      <p className={isRunning ? "active" : ""}>{statusText}</p>
     </section>
   );
 };
