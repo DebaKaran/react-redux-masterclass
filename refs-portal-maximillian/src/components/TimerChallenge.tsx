@@ -1,11 +1,11 @@
-import React, { useState } from "react";
+import React, { useRef, useState } from "react";
 
 interface TimerChallengeProps {
   title: string;
   targetTime: number;
 }
 
-let timer: ReturnType<typeof setTimeout>;
+//let timer: ReturnType<typeof setTimeout>;
 
 const TimerChallenge: React.FC<TimerChallengeProps> = ({
   title,
@@ -14,17 +14,24 @@ const TimerChallenge: React.FC<TimerChallengeProps> = ({
   const [isRunning, setIsRunning] = useState(false);
   const [timerExpired, setTimerExpired] = useState(false);
 
+  const timer = useRef<ReturnType<typeof setTimeout> | null>(null);
+
   const handleStart = () => {
     if (isRunning || timerExpired) return; // prevent multiple starts
     setIsRunning(true);
-    timer = setTimeout(() => {
+    timer.current = setTimeout(() => {
+      console.log(`${title} timer expired`);
       setTimerExpired(true);
       setIsRunning(false);
     }, targetTime * 1000);
   };
 
   const handleStop = () => {
-    clearTimeout(timer);
+    if (timer.current !== null) {
+      clearTimeout(timer.current);
+      // Reset the ref after clearing (cleaner logic)
+      timer.current = null;
+    }
     setIsRunning(false);
   };
 
