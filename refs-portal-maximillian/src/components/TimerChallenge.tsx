@@ -5,14 +5,14 @@ interface TimerChallengeProps {
   targetTime: number;
 }
 
+let timer: ReturnType<typeof setTimeout>;
+
 const TimerChallenge: React.FC<TimerChallengeProps> = ({
   title,
   targetTime,
 }) => {
   const [isRunning, setIsRunning] = useState(false);
   const [timerExpired, setTimerExpired] = useState(false);
-
-  let timer: ReturnType<typeof setTimeout>;
 
   const handleStart = () => {
     if (isRunning || timerExpired) return; // prevent multiple starts
@@ -21,7 +21,6 @@ const TimerChallenge: React.FC<TimerChallengeProps> = ({
       setTimerExpired(true);
       setIsRunning(false);
     }, targetTime * 1000);
-
   };
 
   const handleStop = () => {
