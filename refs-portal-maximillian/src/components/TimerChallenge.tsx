@@ -1,4 +1,5 @@
 import React, { useRef, useState } from "react";
+import ResultModal from "./ResultModal";
 
 interface TimerChallengeProps {
   title: string;
@@ -52,17 +53,21 @@ const TimerChallenge: React.FC<TimerChallengeProps> = ({
     : "Timer inactive";
 
   return (
-    <section className="challenge">
-      <h2>{title}</h2>
-      {timerExpired && <p>You lost</p>}
-      <p className="challenge-time">{timeText}</p>
-      <p>
-        <button onClick={handleClick} disabled={timerExpired}>
-          {isRunning ? "Stop " : "Start "}Challenge
-        </button>
-      </p>
-      <p className={isRunning ? "active" : ""}>{statusText}</p>
-    </section>
+    <>
+      {timerExpired && (
+        <ResultModal result="You Lost" targetTime={targetTime} />
+      )}
+      <section className="challenge">
+        <h2>{title}</h2>
+        <p className="challenge-time">{timeText}</p>
+        <p>
+          <button onClick={handleClick} disabled={timerExpired}>
+            {isRunning ? "Stop " : "Start "}Challenge
+          </button>
+        </p>
+        <p className={isRunning ? "active" : ""}>{statusText}</p>
+      </section>
+    </>
   );
 };
 
