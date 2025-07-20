@@ -12,13 +12,29 @@ const TimerChallenge: React.FC<TimerChallengeProps> = ({
   const [isRunning, setIsRunning] = useState(false);
   const [timerExpired, setTimerExpired] = useState(false);
 
+  let timer: ReturnType<typeof setTimeout>;
+
   const handleStart = () => {
     if (isRunning || timerExpired) return; // prevent multiple starts
     setIsRunning(true);
-    setTimeout(() => {
+    timer = setTimeout(() => {
       setTimerExpired(true);
       setIsRunning(false);
     }, targetTime * 1000);
+
+  };
+
+  const handleStop = () => {
+    clearTimeout(timer);
+    setIsRunning(false);
+  };
+
+  const handleClick = () => {
+    if (isRunning) {
+      handleStop();
+    } else {
+      handleStart();
+    }
   };
 
   const timeText = `${targetTime} ${targetTime === 1 ? "second" : "seconds"}`;
@@ -35,8 +51,8 @@ const TimerChallenge: React.FC<TimerChallengeProps> = ({
       {timerExpired && <p>You lost</p>}
       <p className="challenge-time">{timeText}</p>
       <p>
-        <button onClick={handleStart} disabled={isRunning || timerExpired}>
-          {timerExpired ? "Stop " : "Start "}Challenge
+        <button onClick={handleClick} disabled={timerExpired}>
+          {isRunning ? "Stop " : "Start "}Challenge
         </button>
       </p>
       <p className={isRunning ? "active" : ""}>{statusText}</p>
