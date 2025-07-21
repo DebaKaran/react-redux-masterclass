@@ -1,26 +1,31 @@
-import { forwardRef, useImperativeHandle, useRef } from "react";
+import { forwardRef, useImperativeHandle, useRef, useState } from "react";
 
 interface ResultModalProps {
   targetTime: number;
-  remainingTime: number;
   onClose: () => void;
 }
 
 export interface ResultModalHandle {
-  open: () => void;
+  open: (finalRemainingTime: number) => void;
 }
 
 const ResultModal = forwardRef<ResultModalHandle, ResultModalProps>(
-  function ResultModal({ targetTime, remainingTime, onClose }, ref) {
+  function ResultModal({ targetTime, onClose }, ref) {
     const dialogRef = useRef<HTMLDialogElement>(null);
-    const userLost = remainingTime <= 0;
-    const formattedRemainingTime = (remainingTime / 1000).toFixed(2);
-    const score = Math.round((1 - remainingTime / (targetTime * 1000)) * 100);
+    const [finalTime, setFinalTime] = useState<string | null>(null);
 
-    console.log(formattedRemainingTime);
+    const userLost = finalTime != null && +finalTime <= 0;
+
+    let score: number | undefined;
+    if (finalTime != null) {
+      score = Math.round((1 - +finalTime / targetTime) * 100);
+    }
 
     useImperativeHandle(ref, () => ({
-      open: () => {
+      open: (remainingTime) => {
+        const formattedRemainingTime = (remainingTime / 1000).toFixed(2);
+        setFinalTime(formattedRemainingTime);
+        console.log(formattedRemainingTime);
         dialogRef.current?.showModal();
       },
     }));
@@ -34,7 +39,7 @@ const ResultModal = forwardRef<ResultModalHandle, ResultModalProps>(
         </p>
         <p>
           You stopped the timer with
-          <strong>{formattedRemainingTime} seconds left</strong>
+          <strong>{finalTime} seconds left</strong>
         </p>
         <form method="dialog" onSubmit={onClose}>
           <button>Closed</button>
