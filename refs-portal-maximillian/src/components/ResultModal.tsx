@@ -26,7 +26,7 @@ const ResultModal = forwardRef<ResultModalHandle, ResultModalProps>(
     }));
 
     return (
-      <dialog className="result-modal" ref={dialogRef}>
+      <dialog className="result-modal" ref={dialogRef} onClose={onClose}>
         {userLost && <h2>You Lost</h2>}
         {!userLost && <h2>Your Score: {score}</h2>}
         <p>
