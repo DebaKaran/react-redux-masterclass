@@ -4,6 +4,7 @@ interface ResultModalProps {
   result: string;
   targetTime: number;
   remainingTime: number;
+  onClose: () => void;
 }
 
 export interface ResultModalHandle {
@@ -11,7 +12,7 @@ export interface ResultModalHandle {
 }
 
 const ResultModal = forwardRef<ResultModalHandle, ResultModalProps>(
-  function ResultModal({ result, targetTime, remainingTime }, ref) {
+  function ResultModal({ result, targetTime, remainingTime, onClose }, ref) {
     const dialogRef = useRef<HTMLDialogElement>(null);
     const userLost = remainingTime <= 0;
     const formattedRemainingTime = (remainingTime / 1000).toFixed(2);
@@ -32,7 +33,7 @@ const ResultModal = forwardRef<ResultModalHandle, ResultModalProps>(
           You stopped the timer with
           <strong>{formattedRemainingTime} seconds left</strong>
         </p>
-        <form method="dialog">
+        <form method="dialog" onSubmit={onClose}>
           <button>Closed</button>
         </form>
       </dialog>

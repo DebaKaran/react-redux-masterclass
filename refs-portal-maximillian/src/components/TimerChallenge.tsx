@@ -30,7 +30,6 @@ const TimerChallenge: React.FC<TimerChallengeProps> = ({
           clearInterval(timer.current!);
           // Reset the ref after clearing (cleaner logic)
           timer.current = null;
-          setTimeremaining(targetTime * 1000); //resetting to target time
           modalRef.current?.open(); // Show result when time is up
           return 0;
         }
@@ -47,6 +46,10 @@ const TimerChallenge: React.FC<TimerChallengeProps> = ({
       timer.current = null;
       modalRef.current?.open();
     }
+  };
+
+  const handleReset = () => {
+    setTimeremaining(targetTime * 1000); // Reset to full time
   };
 
   const handleClick = () => {
@@ -68,6 +71,7 @@ const TimerChallenge: React.FC<TimerChallengeProps> = ({
         targetTime={targetTime}
         ref={modalRef}
         remainingTime={timerRemaining}
+        onClose={handleReset}
       />
       <section className="challenge">
         <h2>{title}</h2>
