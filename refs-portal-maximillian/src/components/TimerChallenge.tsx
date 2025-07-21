@@ -67,7 +67,6 @@ const TimerChallenge: React.FC<TimerChallengeProps> = ({
   return (
     <>
       <ResultModal
-        result="You Lost"
         targetTime={targetTime}
         ref={modalRef}
         remainingTime={timerRemaining}
