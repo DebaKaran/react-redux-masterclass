@@ -12,34 +12,45 @@ const TimerChallenge: React.FC<TimerChallengeProps> = ({
   title,
   targetTime,
 }) => {
-  const [isRunning, setIsRunning] = useState(false);
-  const [timerExpired, setTimerExpired] = useState(false);
-
   const timer = useRef<ReturnType<typeof setTimeout> | null>(null);
   const modalRef = useRef<ResultModalHandle>(null);
 
+  const [timerRemaining, setTimeremaining] = useState(targetTime * 1000);
+
+  const timerisActive =
+    timerRemaining > 0 && timerRemaining < targetTime * 1000;
+
   const handleStart = () => {
-    if (isRunning || timerExpired) return; // prevent multiple starts
-    setIsRunning(true);
-    timer.current = setTimeout(() => {
-      console.log(`${title} timer expired`);
-      setTimerExpired(true);
-      setIsRunning(false);
-      modalRef.current?.open();
-    }, targetTime * 1000);
+    if (timerisActive) return;
+
+    timer.current = setInterval(() => {
+      setTimeremaining((prevTimeRemaining) => {
+        //Automatically stopping the timer once timeremaining is less than or equals to zero
+        if (prevTimeRemaining <= 0) {
+          clearInterval(timer.current!);
+          // Reset the ref after clearing (cleaner logic)
+          timer.current = null;
+          setTimeremaining(targetTime * 1000); //resetting to target time
+          modalRef.current?.open(); // Show result when time is up
+          return 0;
+        }
+        return prevTimeRemaining - 10;
+      });
+    }, 10);
   };
 
+  //manually stop the timer
   const handleStop = () => {
     if (timer.current !== null) {
-      clearTimeout(timer.current);
+      clearInterval(timer.current);
       // Reset the ref after clearing (cleaner logic)
       timer.current = null;
+      modalRef.current?.open();
     }
-    setIsRunning(false);
   };
 
   const handleClick = () => {
-    if (isRunning) {
+    if (timerisActive) {
       handleStop();
     } else {
       handleStart();
@@ -48,11 +59,7 @@ const TimerChallenge: React.FC<TimerChallengeProps> = ({
 
   const timeText = `${targetTime} ${targetTime === 1 ? "second" : "seconds"}`;
 
-  const statusText = timerExpired
-    ? "Time is finished"
-    : isRunning
-    ? "Time is running"
-    : "Timer inactive";
+  const statusText = timerisActive ? "Time is running" : "Timer inactive";
 
   return (
     <>
@@ -61,11 +68,11 @@ const TimerChallenge: React.FC<TimerChallengeProps> = ({
         <h2>{title}</h2>
         <p className="challenge-time">{timeText}</p>
         <p>
-          <button onClick={handleClick} disabled={timerExpired}>
-            {isRunning ? "Stop " : "Start "}Challenge
+          <button onClick={handleClick}>
+            {timerisActive ? "Stop " : "Start "}Challenge
           </button>
         </p>
-        <p className={isRunning ? "active" : ""}>{statusText}</p>
+        <p className={timerisActive ? "active" : ""}>{statusText}</p>
       </section>
     </>
   );
