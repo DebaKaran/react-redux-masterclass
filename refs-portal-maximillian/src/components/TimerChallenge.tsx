@@ -63,7 +63,12 @@ const TimerChallenge: React.FC<TimerChallengeProps> = ({
 
   return (
     <>
-      <ResultModal result="You Lost" targetTime={targetTime} ref={modalRef} />
+      <ResultModal
+        result="You Lost"
+        targetTime={targetTime}
+        ref={modalRef}
+        remainingTime={timerRemaining}
+      />
       <section className="challenge">
         <h2>{title}</h2>
         <p className="challenge-time">{timeText}</p>
