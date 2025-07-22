@@ -1,15 +1,8 @@
-import { useState } from "react";
-import type { AvailablePlace } from "../types/AvailablePlace";
 import Places from "./Places";
+import useSelectedPlace from "../hooks/useSelectedPlace";
 
 const SelectedPlace = () => {
-  const [selectedPlace, setSelectedPlace] = useState<AvailablePlace | null>(
-    null
-  );
-
-  const selectPlaceHandler = (place: AvailablePlace) => {
-    setSelectedPlace(place);
-  };
+  const { selectedPlace, selectPlaceHandler } = useSelectedPlace();
 
   const content = `You selected: ${selectedPlace?.title}`;
   return (
