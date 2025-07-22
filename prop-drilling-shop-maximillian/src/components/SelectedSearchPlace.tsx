@@ -4,18 +4,12 @@ import type {
   SelectedSearchPlaceProps,
 } from "../types/AvailablePlace";
 import SearchFilter from "./SearchFilter";
+import useSelectedPlace from "../hooks/useSelectedPlace";
 
 const SelectedSearchPlace: React.FC<SelectedSearchPlaceProps> = ({
   searchTitle,
 }) => {
-  const [selectedPlace, setSelectedPlace] = useState<AvailablePlace | null>(
-    null
-  );
-
-  const handleOnSelectPlace = (place: AvailablePlace) => {
-    setSelectedPlace(place);
-  };
-
+  const { selectedPlace, selectPlaceHandler } = useSelectedPlace();
   return (
     <div>
       {selectedPlace && (
@@ -24,7 +18,7 @@ const SelectedSearchPlace: React.FC<SelectedSearchPlaceProps> = ({
       {searchTitle && (
         <SearchFilter
           searchTerm={searchTitle}
-          onSelectPlace={handleOnSelectPlace}
+          onSelectPlace={selectPlaceHandler}
           place={selectedPlace}
         />
       )}
