@@ -1,12 +1,5 @@
 import type React from "react";
-import type { AvailablePlace } from "../types/AvailablePlace";
-
-interface PlaceProp {
-  place: AvailablePlace;
-  selectedId: string;
-  selectedTitle: string;
-  selectPlaceHandler: (selectedId: string, selectedTitle: string) => void;
-}
+import type { PlaceProp } from "../types/AvailablePlace";
 
 const Place: React.FC<PlaceProp> = ({
   place,
