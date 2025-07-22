@@ -10,14 +10,17 @@ interface SearchFilterProps {
 const SearchFilter: React.FC<SearchFilterProps> = ({ searchTerm }) => {
   const availablePlaces: AvailablePlace[] = AVAILABLE_PLACES;
 
-  const filterSearchPlaceSearchPlaces: AvailablePlace[] =
-    availablePlaces.filter((place) =>
-      place.title.toLowerCase().includes(searchTerm.toLowerCase())
-    );
-  const renderedFilteredPlaces = filterSearchPlaceSearchPlaces.map((place) => (
+  const filteredPlaces: AvailablePlace[] = availablePlaces.filter((place) =>
+    place.title.toLowerCase().includes(searchTerm.toLowerCase())
+  );
+  const renderedFilteredPlaces = filteredPlaces.map((place) => (
     <SearchResultPlace place={place} key={place.id} />
   ));
-  return <ul className="places">{renderedFilteredPlaces}</ul>;
+  return renderedFilteredPlaces.length == 0 ? (
+    <p>No places found for "{searchTerm}".</p>
+  ) : (
+    <ul className="places">{renderedFilteredPlaces}</ul>
+  );
 };
 
 export default SearchFilter;
