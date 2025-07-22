@@ -4,7 +4,7 @@ import type {
   AvailablePlace,
   SearchFilterProps,
 } from "../types/AvailablePlace";
-import SearchResultPlace from "./SearchResultPlace";
+import Place from "./Place";
 
 const SearchFilter: React.FC<SearchFilterProps> = ({
   searchTerm,
@@ -18,7 +18,7 @@ const SearchFilter: React.FC<SearchFilterProps> = ({
   );
 
   const renderedFilteredPlaces = filteredPlaces.map((place1) => (
-    <SearchResultPlace
+    <Place
       place={place1}
       key={place1.id}
       onSelectPlace={onSelectPlace}
