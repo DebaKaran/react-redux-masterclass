@@ -1,9 +1,12 @@
 import React from "react";
 import { AVAILABLE_PLACES } from "../data/dummy-products";
-import type { AvailablePlace, SelectedProps } from "../types/AvailablePlace";
+import type {
+  AvailablePlace,
+  SelectedPlaceProps,
+} from "../types/AvailablePlace";
 import Place from "./Place";
 
-const Places: React.FC<SelectedProps> = ({
+const Places: React.FC<SelectedPlaceProps> = ({
   selectedId,
   selectedTitle,
   selectPlaceHandler,
