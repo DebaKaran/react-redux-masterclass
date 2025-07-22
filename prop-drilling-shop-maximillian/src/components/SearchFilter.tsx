@@ -1,27 +1,28 @@
 import React from "react";
 import { AVAILABLE_PLACES } from "../data/dummy-products";
-import type { AvailablePlace } from "../types/AvailablePlace";
+import type {
+  AvailablePlace,
+  SearchFilterProps,
+} from "../types/AvailablePlace";
 import SearchResultPlace from "./SearchResultPlace";
-
-interface SearchFilterProps {
-  searchTerm: string;
-  onSelectPlace: (place: AvailablePlace) => void;
-}
 
 const SearchFilter: React.FC<SearchFilterProps> = ({
   searchTerm,
   onSelectPlace,
+  place,
 }) => {
   const availablePlaces: AvailablePlace[] = AVAILABLE_PLACES;
 
   const filteredPlaces: AvailablePlace[] = availablePlaces.filter((place) =>
     place.title.toLowerCase().includes(searchTerm.toLowerCase())
   );
-  const renderedFilteredPlaces = filteredPlaces.map((place) => (
+
+  const renderedFilteredPlaces = filteredPlaces.map((place1) => (
     <SearchResultPlace
-      place={place}
-      key={place.id}
+      place={place1}
+      key={place1.id}
       onSelectPlace={onSelectPlace}
+      isSelected={place?.id === place1.id}
     />
   ));
   return (
