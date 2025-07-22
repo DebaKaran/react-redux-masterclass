@@ -2,6 +2,7 @@ import { useState } from "react";
 import "./App.css";
 import SearchPlace from "./components/SearchPlace";
 import SelectedPlace from "./components/SelectedPlace";
+import SearchFilter from "./components/SearchFilter";
 
 function App() {
   const [searchTitle, setSearchTitle] = useState("");
@@ -14,7 +15,7 @@ function App() {
     <>
       <SearchPlace onSearch={handleSearch} />
       <SelectedPlace />
-      {searchTitle}
+      {searchTitle && <SearchFilter searchTerm={searchTitle} />}
     </>
   );
 }

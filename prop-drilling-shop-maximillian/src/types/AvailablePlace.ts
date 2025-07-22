@@ -9,12 +9,12 @@ export type AvailablePlace = {
   lon: number;
 };
 
-export interface SelectedProps {
+export interface SelectedPlaceProps extends PlaceProp {
   selectedId: string;
   selectedTitle: string;
   selectPlaceHandler: (selectedId: string, selectedTitle: string) => void;
 }
 
-export interface PlaceProp extends SelectedProps {
+export interface PlaceProp {
   place: AvailablePlace;
 }
