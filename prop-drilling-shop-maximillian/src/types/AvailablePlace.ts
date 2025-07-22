@@ -14,3 +14,7 @@ export interface SelectedProps {
   selectedTitle: string;
   selectPlaceHandler: (selectedId: string, selectedTitle: string) => void;
 }
+
+export interface PlaceProp extends SelectedProps {
+  place: AvailablePlace;
+}
