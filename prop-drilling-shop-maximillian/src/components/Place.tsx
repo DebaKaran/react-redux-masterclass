@@ -1,7 +1,7 @@
 import type React from "react";
-import type { SelectedPlaceProps } from "../types/AvailablePlace";
+import type { PlaceProp } from "../types/AvailablePlace";
 
-const Place: React.FC<SelectedPlaceProps> = ({
+const Place: React.FC<PlaceProp> = ({
   place,
   selectedId,
   selectedTitle,
