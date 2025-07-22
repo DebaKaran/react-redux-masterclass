@@ -1,6 +1,6 @@
 import React from "react";
 import { AVAILABLE_PLACES } from "../data/dummy-products";
-import type { AvailablePlace } from "../types/AvailablePlace";  
+import type { AvailablePlace } from "../types/AvailablePlace";
 import SearchResultPlace from "./SearchResultPlace";
 
 interface SearchFilterProps {
@@ -17,7 +17,7 @@ const SearchFilter: React.FC<SearchFilterProps> = ({ searchTerm }) => {
   const renderedFilteredPlaces = filterSearchPlaceSearchPlaces.map((place) => (
     <SearchResultPlace place={place} key={place.id} />
   ));
-  return <div>{renderedFilteredPlaces}</div>;
+  return <ul className="places">{renderedFilteredPlaces}</ul>;
 };
 
 export default SearchFilter;

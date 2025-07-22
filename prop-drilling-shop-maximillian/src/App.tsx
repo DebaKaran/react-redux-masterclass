@@ -15,6 +15,9 @@ function App() {
     <>
       <SearchPlace onSearch={handleSearch} />
       <SelectedPlace />
+      {searchTitle && (
+        <p className="search-summary">You searched: {searchTitle}</p>
+      )}
       {searchTitle && <SearchFilter searchTerm={searchTitle} />}
     </>
   );
