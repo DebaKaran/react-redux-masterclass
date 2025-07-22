@@ -1,11 +1,11 @@
 import "./App.css";
-import Places from "./components/Places";
+import SelectedPlace from "./components/SelectedPlace";
 
 function App() {
   return (
     <>
       <h1>Learn React Context API</h1>
-      <Places />
+      <SelectedPlace />
     </>
   );
 }
