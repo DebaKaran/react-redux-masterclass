@@ -30,4 +30,15 @@ export interface PlacesProps {
 export interface SearchResultPlaceProps {
   place: AvailablePlace;
   onSelectPlace: (place: AvailablePlace) => void;
+  isSelected: boolean;
+}
+
+export interface SelectedSearchPlaceProps {
+  searchTitle: string;
+}
+
+export interface SearchFilterProps {
+  searchTerm: string;
+  onSelectPlace: (place: AvailablePlace) => void;
+  place: AvailablePlace | null;
 }
