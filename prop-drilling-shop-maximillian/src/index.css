@@ -227,3 +227,11 @@ header p {
     transform: translateY(0);
   }
 }
+
+.place-item.selected button {
+  box-shadow: 0 0 12px 6px rgba(0, 255, 170, 0.6); /* Glowing green-blue effect */
+  transform: scale(1.03);
+  border-radius: 8px;
+  outline: 2px solid #8feeff;
+  transition: all 0.2s ease-in-out;
+}

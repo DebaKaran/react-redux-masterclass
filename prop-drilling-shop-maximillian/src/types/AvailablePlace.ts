@@ -9,14 +9,22 @@ export type AvailablePlace = {
   lon: number;
 };
 
-export interface SelectedPlaceProps {
-  selectedId: string;
-  selectedTitle: string;
-  selectPlaceHandler: (selectedId: string, selectedTitle: string) => void;
+// export interface SelectedPlaceProps {
+//   selectedId: string;
+//   selectedTitle: string;
+//   selectPlaceHandler: (selectedId: string, selectedTitle: string) => void;
+// }
+
+export interface PlaceProp {
+  place: AvailablePlace;
+  onSelectPlace: (place: AvailablePlace) => void;
+  isSelected: boolean;
 }
 
-export interface PlaceProp extends SelectedPlaceProps {
-  place: AvailablePlace;
+//Since in the Places, we have defined place as AvailablePlace | null
+export interface PlacesProps {
+  place: AvailablePlace | null; // Optional
+  onSelectPlace: (place: AvailablePlace) => void;
 }
 
 export interface SearchResultPlaceProps {
