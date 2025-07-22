@@ -1,13 +1,22 @@
 import React from "react";
 import { AVAILABLE_PLACES } from "../data/dummy-products";
-import type { AvailablePlace } from "../types/AvailablePlace";
+import type { AvailablePlace, SelectedProps } from "../types/AvailablePlace";
 import Place from "./Place";
 
-const Places = () => {
+const Places: React.FC<SelectedProps> = ({
+  selectedId,
+  selectedTitle,
+  selectPlaceHandler,
+}) => {
   const availablePlaces: AvailablePlace[] = AVAILABLE_PLACES;
 
   const renderedAvailablePlaces = availablePlaces.map((place) => (
-    <Place place={place} />
+    <Place
+      place={place}
+      selectedId={selectedId}
+      selectedTitle={selectedTitle}
+      selectPlaceHandler={selectPlaceHandler}
+    />
   ));
 
   return <ul className="places">{renderedAvailablePlaces}</ul>;

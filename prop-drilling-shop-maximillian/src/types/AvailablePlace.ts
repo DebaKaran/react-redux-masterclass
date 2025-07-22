@@ -8,3 +8,9 @@ export type AvailablePlace = {
   lat: number;
   lon: number;
 };
+
+export interface SelectedProps {
+  selectedId: string;
+  selectedTitle: string;
+  selectPlaceHandler: (selectedId: string, selectedTitle: string) => void;
+}
