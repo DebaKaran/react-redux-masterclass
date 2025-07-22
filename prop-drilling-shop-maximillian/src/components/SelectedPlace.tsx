@@ -1,26 +1,22 @@
 import { useState } from "react";
+import type { AvailablePlace } from "../types/AvailablePlace";
 import Places from "./Places";
 
 const SelectedPlace = () => {
-  const [selectedPlaceId, setSelectedPlaceId] = useState("");
-  const [title, setTitle] = useState("");
-  const [isSeleted, setIsSelected] = useState(false);
+  const [selectedPlace, setSelectedPlace] = useState<AvailablePlace | null>(
+    null
+  );
 
-  const selectPlaceHandler = (selectedId: string, title: string) => {
-    setSelectedPlaceId(selectedId);
-    setTitle(title);
-    setIsSelected(true);
+  const selectPlaceHandler = (place: AvailablePlace) => {
+    setSelectedPlace(place);
   };
-  const content = `You selected: ${title}`;
+
+  const content = `You selected: ${selectedPlace?.title}`;
   return (
     <>
-      <Places
-        selectPlaceHandler={selectPlaceHandler}
-        selectedId={selectedPlaceId}
-        selectedTitle={title}
-      />
-      <h2>{selectedPlaceId}</h2>
-      {isSeleted && <h1>{content}</h1>}
+      <Places onSelectPlace={selectPlaceHandler} place={selectedPlace} />
+      <h2>{selectedPlace?.id}</h2>
+      {selectedPlace && <h1>{content}</h1>}
     </>
   );
 };
