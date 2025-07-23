@@ -1,4 +1,5 @@
 import React, { useReducer } from "react";
+import { produce } from "immer";
 
 import {
   DECREMENT,
@@ -20,16 +21,21 @@ type Action =
   | { type: typeof SET_VALUE_TO_ADD; payload: number }
   | { type: typeof ADD_VALUE_TO_COUNT };
 
-const reducer = (state: State, action: Action): State => {
+const reducer = (state: State, action: Action) => {
   switch (action.type) {
     case INCREMENT:
-      return { ...state, count: state.count + 1 };
+      state.count = state.count + 1;
+      return;
     case DECREMENT:
-      return { ...state, count: state.count - 1 };
+      state.count = state.count - 1;
+      return;
     case SET_VALUE_TO_ADD:
-      return { ...state, valueToAdd: action.payload };
+      state.valueToAdd = action.payload;
+      return;
     case ADD_VALUE_TO_COUNT:
-      return { ...state, count: state.count + state.valueToAdd, valueToAdd: 0 };
+      state.count = state.count + state.valueToAdd;
+      state.valueToAdd = 0;
+      return;
   }
   return state;
 };
@@ -37,7 +43,7 @@ const reducer = (state: State, action: Action): State => {
 const CounterPage: React.FC<Count> = ({ initialCount }) => {
   const initalState = { count: initialCount, valueToAdd: 0 };
 
-  const [state, dispatch] = useReducer(reducer, initalState);
+  const [state, dispatch] = useReducer(produce(reducer), initalState);
 
   const increment = () => {
     const incrementAction: Action = { type: INCREMENT };
