@@ -1,10 +1,13 @@
 import React, { useReducer } from "react";
-import type { Count } from "../types/count";
 
-const INCREMENT_COUNT = "increment";
-const DECREMENT_COUNT = "decrement";
-const SET_VALUE_TO_ADD = "change-value-to-add";
-const ADD_VALUE_TO_COUNT = "add_value_to_count";
+import {
+  DECREMENT,
+  INCREMENT,
+  SET_VALUE_TO_ADD,
+  ADD_VALUE_TO_COUNT,
+} from "../reducers/actionTypes";
+
+import type { Count } from "../types/Count";
 
 type State = {
   count: number;
@@ -12,16 +15,16 @@ type State = {
 };
 
 type Action =
-  | { type: "increment" }
-  | { type: "decrement" }
-  | { type: "change-value-to-add"; payload: number }
-  | { type: "add_value_to_count" };
+  | { type: typeof INCREMENT }
+  | { type: typeof DECREMENT }
+  | { type: typeof SET_VALUE_TO_ADD; payload: number }
+  | { type: typeof ADD_VALUE_TO_COUNT };
 
 const reducer = (state: State, action: Action): State => {
   switch (action.type) {
-    case INCREMENT_COUNT:
+    case INCREMENT:
       return { ...state, count: state.count + 1 };
-    case DECREMENT_COUNT:
+    case DECREMENT:
       return { ...state, count: state.count - 1 };
     case SET_VALUE_TO_ADD:
       return { ...state, valueToAdd: action.payload };
@@ -37,12 +40,12 @@ const CounterPage: React.FC<Count> = ({ initialCount }) => {
   const [state, dispatch] = useReducer(reducer, initalState);
 
   const increment = () => {
-    const incrementAction: Action = { type: INCREMENT_COUNT };
+    const incrementAction: Action = { type: INCREMENT };
     dispatch(incrementAction);
   };
 
   const decrement = () => {
-    const decrementAction: Action = { type: DECREMENT_COUNT };
+    const decrementAction: Action = { type: DECREMENT };
     dispatch(decrementAction);
   };
 
